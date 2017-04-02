@@ -45,6 +45,7 @@ namespace WriteDown
         public MainPage()
         {
             this.InitializeComponent();
+            lvNote.Visibility = Visibility.Visible;
             init();
         }
 
@@ -147,7 +148,7 @@ namespace WriteDown
                 rssItems.Add(rss);
                 rssItemTitles.Add(rss.itemTitle);
             }
-            web.NavigateToString(context);
+            //web.NavigateToString(context);
             lvNote.ItemsSource = rssItemTitles;
         }
 
@@ -155,9 +156,8 @@ namespace WriteDown
         {
             if (lvNote.SelectedItems.Count != 0)
             {
-                if (Window.Current.Bounds.Width > 640) web.NavigateToString(rssItems[lvNote.SelectedIndex].itemSummary);
+                if (Window.Current.Bounds.Width > 640) detailFrame.Navigate(typeof(ContentPage), rssItems[lvNote.SelectedIndex].itemSummary); //web.NavigateToString(rssItems[lvNote.SelectedIndex].itemSummary);
                 else Frame.Navigate(typeof(ContentPage), rssItems[lvNote.SelectedIndex].itemSummary);
-                detailFrame.Navigate(typeof(ContentPage), rssItems[lvNote.SelectedIndex].itemSummary);
             }
         }
 

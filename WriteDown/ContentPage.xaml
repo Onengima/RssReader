@@ -6,18 +6,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
     <Page.BottomAppBar>
-        <CommandBar x:Name="bar" Margin="0,0,0,0">
+        <CommandBar x:Name="bottomAppBar">
             <CommandBar.Content>
                 <Grid/>
             </CommandBar.Content>
             <AppBarButton Icon="Accept" Label="AppBarButton"/>
-            <AppBarButton Icon="Cancel" Label="AppBarButton" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Cancel" Label="AppBarButton"/>
         </CommandBar>
     </Page.BottomAppBar>
-
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualGroup1">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="bottomAppBar.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <WebView x:Name="webShow"/>
     </Grid>
 </Page>

@@ -35,7 +35,7 @@
                         <Setter Target="Splitter.DisplayMode" Value="Overlay"/>
                         <Setter Target="lvNote.HorizontalAlignment" Value="Stretch"/>
                         <Setter Target="lvNote.Width" Value="Auto"/>
-                        <Setter Target="gvShow.Visibility" Value="Collapsed"/>
+                        <Setter Target="lvNote.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
@@ -93,13 +93,14 @@
 
             </SplitView.Pane>
             <Grid>
-                <ListView x:Name="lvNote" HorizontalAlignment="Left" Width="300" SelectionChanged="lvNote_SelectionChanged"/>
-                <Grid x:Name="gvShow" Margin="300,0,0,0" Background="#FFF1F1F1">
-                    <Frame Name="detailFrame"/>
-                    <WebView x:Name="web" Margin="0,0,0,0" Visibility="Collapsed"/>
-                </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="lvNote" SelectionChanged="lvNote_SelectionChanged" Width="300" Grid.Column="0"/>
+                <Frame Name="detailFrame" Grid.Column="1"/>
             </Grid>
         </SplitView>
-        
+
     </Grid>
 </Page>
