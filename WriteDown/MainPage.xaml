@@ -1,0 +1,105 @@
+﻿<Page
+    x:Class="WriteDown.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WriteDown"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.TopAppBar>
+        <CommandBar>
+            <CommandBar.Content>
+                <Grid>
+                    <ToggleButton Click="Button_Click" VerticalAlignment="Top" Foreground="White" Height="48" Width="48">
+                        <ToggleButton.Content>
+                            <Border Background="Transparent" Width="25" Height="25">
+                                <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+                            </Border>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+                </Grid>
+            </CommandBar.Content>
+            <AppBarButton Icon="Accept" Label="AppBarButton"/>
+            <AppBarButton Icon="Cancel" Label="AppBarButton"/>
+        </CommandBar>
+    </Page.TopAppBar>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualGroup1">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Splitter.DisplayMode" Value="Overlay"/>
+                        <Setter Target="lvNote.HorizontalAlignment" Value="Stretch"/>
+                        <Setter Target="lvNote.Width" Value="Auto"/>
+                        <Setter Target="gvShow.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Splitter.DisplayMode" Value="CompactOverlay"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <SplitView x:Name="Splitter" IsPaneOpen="False" 
+                   PaneBackground="#FF1993FA"
+                   DisplayMode="CompactOverlay"
+                   CompactPaneLength="48">
+            <SplitView.Pane>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="1" Background="#106EBE">
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal" >
+                                <SymbolIcon Symbol="People" />
+                                <TextBlock Text="People"
+                                           Margin="24,0,0,0"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal" >
+                                <SymbolIcon Symbol="Globe" />
+                                <TextBlock Text="Globe"
+                                           Margin="24,0,0,0"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal" >
+                                <SymbolIcon Symbol="Message" />
+                                <TextBlock Text="Message"
+                                           Margin="24,0,0,0"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <ListView x:Name="lvRssSrc" Margin="48,0,0,0" SelectionChanged="lvRssSrc_SelectionChanged"/>
+                        </ListViewItem>
+                    </ListView>
+
+                </Grid>
+
+            </SplitView.Pane>
+            <Grid>
+                <ListView x:Name="lvNote" HorizontalAlignment="Left" Width="300" SelectionChanged="lvNote_SelectionChanged"/>
+                <Grid x:Name="gvShow" Margin="300,0,0,0" Background="#FFF1F1F1">
+                    <Frame Name="detailFrame"/>
+                    <WebView x:Name="web" Margin="0,0,0,0" Visibility="Collapsed"/>
+                </Grid>
+            </Grid>
+        </SplitView>
+        
+    </Grid>
+</Page>
